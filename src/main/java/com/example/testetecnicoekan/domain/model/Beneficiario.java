@@ -25,8 +25,4 @@ public class Beneficiario {
     private Date dataInclusao;
     //    @LastModifiedDate
     private Date dataAtualizacao;
-
-    @OneToMany
-    private List<Documento> documentos;
-
 }
