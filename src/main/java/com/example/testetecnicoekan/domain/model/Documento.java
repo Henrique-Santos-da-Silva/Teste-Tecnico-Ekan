@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -13,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
+@EntityListeners(AuditingEntityListener.class)
 public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +24,11 @@ public class Documento {
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
     private String descricao;
-    //    @CreatedDate
+    @CreatedDate
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(updatable = false)
     private Date dataInclusao;
-    //    @LastModifiedDate
+    @LastModifiedDate
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date dataAtualizacao;
 

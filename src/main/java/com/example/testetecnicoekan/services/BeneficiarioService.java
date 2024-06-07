@@ -3,6 +3,7 @@ package com.example.testetecnicoekan.services;
 import com.example.testetecnicoekan.domain.model.Beneficiario;
 import com.example.testetecnicoekan.domain.model.Documento;
 import com.example.testetecnicoekan.repositories.BeneficiarioRepository;
+import com.example.testetecnicoekan.utils.FormatadorDeData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,12 @@ public class BeneficiarioService {
         novoBeneficiario.setNome(beneficiario.getNome());
         novoBeneficiario.setTelefone(beneficiario.getTelefone());
         novoBeneficiario.setDataNascimento(beneficiario.getDataNascimento());
+//        novoBeneficiario.setDataInclusao(FormatadorDeData.formataData());
+//        novoBeneficiario.setDataAtualizacao(FormatadorDeData.formataData());
 
         for (Documento documento : beneficiario.getDocumentos()) {
+//            documento.setDataInclusao(FormatadorDeData.formataData());
+//            documento.setDataAtualizacao(FormatadorDeData.formataData());
             novoBeneficiario.addDocumento(documento);
         }
 
@@ -38,13 +43,17 @@ public class BeneficiarioService {
         Beneficiario beneficiarioBuscado = repository.findById(id).orElseThrow(() -> new RuntimeException("Beneficiario não encontrado"));
         beneficiarioBuscado.setNome(beneficiario.getNome());
         beneficiarioBuscado.setTelefone(beneficiario.getTelefone());
-        beneficiarioBuscado.setDataNascimento(beneficiario.getDataNascimento());
+//        beneficiarioBuscado.setDataNascimento(beneficiario.getDataNascimento());
+//        beneficiarioBuscado.setDataAtualizacao(FormatadorDeData.formataData());
+
 
         beneficiarioBuscado.getDocumentos().clear();
         for (Documento documento : beneficiario.getDocumentos()) {
             Documento novoDocumento = new Documento();
             novoDocumento.setTipoDocumento(documento.getTipoDocumento());
             novoDocumento.setDescricao(documento.getDescricao());
+//            novoDocumento.setDataAtualizacao(FormatadorDeData.formataData());
+//            novoDocumento.setDataInclusao(documento.getDataInclusao());
 
             beneficiarioBuscado.addDocumento(novoDocumento);
         }

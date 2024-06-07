@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
+@EntityListeners(AuditingEntityListener.class)
 public class Beneficiario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +26,11 @@ public class Beneficiario {
     private String nome;
     private String telefone;
     private String dataNascimento;
-    //    @CreatedDate
+    @CreatedDate
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(updatable = false)
     private Date dataInclusao;
-    //    @LastModifiedDate
+    @LastModifiedDate
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date dataAtualizacao;
 
