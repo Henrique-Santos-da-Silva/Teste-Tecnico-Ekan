@@ -38,8 +38,6 @@ Para criar um novo beneficiário ou editar você precisa enviar os dados conform
 		}
 	]
 }
-	]
-}
 ```
 
 - PUT: `URL_BASE/{id}`
